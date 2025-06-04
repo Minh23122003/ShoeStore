@@ -52,11 +52,9 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:20|unique:users,username',
-            'email' => 'required|string|unique:users,email',
+            'username' => 'required|string|unique:users,username',
         ], [
             'username.unique' => 'Username already exists!',
-            'email.unique' => 'Email already exists!',
         ]);
 
         $user = new User();

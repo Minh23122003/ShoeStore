@@ -39,7 +39,9 @@ class BillController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $bill = Bill::with('shoe')->find($id);
+
+        return response()->json($bill, 200);
     }
 
     /**
@@ -58,5 +60,13 @@ class BillController extends Controller
         $bill = Bill::find($id);
         $bill->delete();
         return response()->json([], 204);
+    }
+
+    public function pay(string $id)
+    {
+        $bill = Bill::find($id);
+        $bill->payment_at = now();
+        $bill->save();
+        return response()->json([], 200);
     }
 }

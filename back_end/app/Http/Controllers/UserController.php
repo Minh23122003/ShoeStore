@@ -36,7 +36,7 @@ class UserController extends Controller
             'username' => 'required|string|max:20|unique:users,username',
             'password' => 'required|string|min:8',
             'name' => 'required|string|max:50',
-            'email' => 'required|string|unique:users,email',
+            'email' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string|size:10'
         ], [
@@ -48,7 +48,6 @@ class UserController extends Controller
             'name.required' => 'Please enter the name!',
             'name.max' => 'Username is too long. It cannot be longer than 50 characters!',
             'email.required' => 'Please enter the email!',
-            'email.unique' => 'Email already exists!',
             'address.required' => 'Please enter the address!',
             'phone.required' => 'Please enter the phone!',
             'phone.size' => 'Phone must have 10 digits!',
@@ -92,7 +91,7 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:20', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:8',
             'name' => 'required|string|max:50',
-            'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($user->id)],
+            'email' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string|size:10'
         ], [
@@ -103,7 +102,6 @@ class UserController extends Controller
             'name.required' => 'Please enter the name!',
             'name.max' => 'Username is too long. It cannot be longer than 50 characters!',
             'email.required' => 'Please enter the email!',
-            'email.unique' => 'Email already exists!',
             'address.required' => 'Please enter the address!',
             'phone.required' => 'Please enter the phone!',
             'phone.size' => 'Phone must have 10 digits!',

@@ -15,23 +15,23 @@ class ShoeController extends Controller
     {
         $query = Shoe::query();
 
-        if ($request->has('name')) {
+        if ($request->has('name') && $request->name != null) {
             $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        if ($request->has('min_price')) {
+        if ($request->has('min_price') && $request->min_price != null) {
             $query->where('price', '>=', $request->min_price);
         }
 
-        if ($request->has('max_price')) {
+        if ($request->has('max_price') && $request->max_price != null) {
             $query->where('price', '<=', $request->max_price);
         }
 
-        if ($request->has('category_id')) {
+        if ($request->has('category_id') && $request->category_id != null) {
             $query->where('category_id', $request->category_id);
         }
 
-        $shoes = $query->with('category')->paginate(2);
+        $shoes = $query->with('category')->paginate(4);
 
         return response()->json($shoes);
     }
@@ -49,7 +49,9 @@ class ShoeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $shoe = Shoe::find($id);
+
+        return response()->json($shoe);
     }
 
     /**
