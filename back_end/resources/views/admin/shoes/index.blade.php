@@ -33,7 +33,7 @@
                     <th>{{ $shoe->price }}</th>
                     <th>{{ $shoe->note }}</th>
                     <th>{{ $shoe->category->name }}</th>
-                    <th><img src="/storage/shoes/GSTq0V3HXKl8Tr3t37NJPAGelZM6e7Hhx75rtBh5.png" width="100"></th>
+                    <th><img src="{{ asset('storage/' . $shoe->image) }}" width="100"></th>
                     <th><a class="text-dark text-decoration-none" href="{{ route('admin.shoes.edit', $shoe) }}">&#9998; Change</a></th>
                     <th>
                         <form action="{{ route('admin.shoes.destroy', $shoe) }}" method="POST">
