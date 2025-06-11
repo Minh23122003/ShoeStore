@@ -1,0 +1,30 @@
+<div class="bg-info ms-auto me-auto text-center" style="width:25%; margin-top:50px">
+    <h2>Đăng ký tài khoản</h2>
+        
+        <label>Tên đăng nhập:</label><br>
+        <input type="text" name="username" [(ngModel)]="username"><br><br>
+
+        <label>Mật khẩu:</label><br>
+        <input type="password" name="password" [(ngModel)]="password"><br><br>
+
+        <label>Xác nhận mật khẩu:</label><br>
+        <input type="password" name="passwordConfirm" [(ngModel)]="passwordConfirm"><br><br>
+
+        <label>Họ và tên:</label><br>
+        <input type="text" name="name" [(ngModel)]="name"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" [(ngModel)]="email"><br><br>
+
+        <label>Địa chỉ:</label><br>
+        <input type="text" name="address" [(ngModel)]="address"><br><br>
+
+        <label>Số điện thoại:</label><br>
+        <input type="number" name="phone" [(ngModel)]="phone"><br><br>
+
+        @if (error) {
+            <p class="text-danger">{{ error }}</p>
+        }
+
+        <button (click)="register()" type="submit" class="mb-3">Đăng ký</button>
+</div>

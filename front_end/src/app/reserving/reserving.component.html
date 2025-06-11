@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<div class="bg-info ms-auto me-auto text-center" style="width:25%; margin-top:50px">
+    <h2>Đặt mua</h2>
+
+    <h4>Tên sản phẩm: {{ shoe.name }}</h4>
+    <h4>Giá: {{ shoe.price }}</h4>
+    <h4>Số lượng còn lại: {{ shoe.remaining_quantity }}</h4>
+        
+    <label>Số lượng:</label><br>
+    <input type="number" name="quantity" [(ngModel)]="quantity"><br><br>
+
+    <label>Size:</label><br>
+    <select style="width: 60%;" class="form-select ms-auto me-auto mb-3" name="size" [(ngModel)]="size">
+        <option value="35" selected>35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+    </select><br>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    <button (click)="reserving()" type="submit" class="mb-3">Đặt mua</button>
+</div>

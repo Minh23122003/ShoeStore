@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<div class="bg-info ms-auto me-auto text-center" style="width:25%; margin-top:250px">
+    <h2>Đánh giá sản phẩm</h2>
+
+    <h4>Tên sản phẩm: {{ bill.shoe.name }}</h4>
+        
+    <label>Số sao:</label><br>
+    <select [(ngModel)]="star" class="form-select ms-auto me-auto" style="width: 50%;">
+        <option value="1">1 &#9733;</option>
+        <option value="2">2 &#9733;</option>
+        <option value="3">3 &#9733;</option>
+        <option value="4">4 &#9733;</option>
+        <option value="5">5 &#9733;</option>
+    </select><br>
+
+    <label>Nội dung:</label><br>
+    <input type="text" name="content" [(ngModel)]="content"><br><br>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    <button (click)="rating()" type="submit" class="mb-3">Gửi đánh giá</button>
+
+</div>

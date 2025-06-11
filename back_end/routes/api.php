@@ -20,7 +20,7 @@ Route::post('/bills/{id}/pay', [BillController::class, 'pay']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/profile', [UserController::class, 'profile']);
-    Route::post('/bill', [BillController::class, 'store']);
+    Route::post('/bills', [BillController::class, 'store']);
     Route::get('/user/bills', [BillController::class, 'index']);
     Route::post('/ratings', [RatingController::class, 'store']);
 });

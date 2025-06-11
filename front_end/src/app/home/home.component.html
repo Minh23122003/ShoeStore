@@ -1,0 +1,53 @@
+<app-header></app-header>
+
+<div class="container row mb-4">
+    <div class="col-md-3 me-3">
+        <label class="mb-1 form-label" for="">Nhập tên sản phẩm</label>
+        <input [(ngModel)]="searchName" class="form-control" type="text" >
+    </div>
+    <div class="col-md-3 me-3">
+        <label class="mb-1 form-label" for="">Chọn giá tiền</label>
+        <select [(ngModel)]="selectedPrice" class="form-select" name="" id="">
+            <option value="0">Tất cả</option>
+            <option value="1">Dưới 500.000đ</option>
+            <option value="2">Từ 500.000đ đến 3.000.000đ</option>
+            <option value="3">Trên 3.000.000đ</option>
+        </select>
+    </div>
+    <div class="col-md-3 me-3">
+        <label class="mb-1 form-label" for="">Chọn danh mục</label>
+        <select [(ngModel)]="selectedCategoryId" name="" id="" class="form-select">
+            <option value="0">Tất cả</option>
+            @for (category of categories; track category.id) {
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button (click)="searchShoes()" class="btn btn-primary">Tìm kiếm</button>
+    </div>
+</div>
+
+<ul class="pagination ms-4 mb-3">
+  <li class="page-item me-3"><button [disabled]="currentPage == 1" (click)="goToPreviousPage()" class="btn btn-primary">Trang trước</button></li>
+  <li class="page-item"><button [disabled]="currentPage == totalPage" (click)="goToNextPage()" class="btn btn-primary">Trang sau</button></li>
+</ul>
+
+<div class="container row ms-5 mt-3">
+    @if (shoes.length == 0) {
+        <h2 class="col-md-12 text-center">Không có sản phẩm phù hợp với yêu cầu</h2>
+    }
+    @else {
+        @for (shoe of shoes; track shoe.id) {
+        <div class="card col-md-4 ps-3 border-0 mb-3">
+            <img class="card-img-top" src="http://localhost:8000/storage/{{shoe.image}}" alt="Card image">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{ shoe.name }}</h4>
+                <p class="card-text">Giá: {{ shoe.price }}</p>
+                <button (click)="goToDetails(shoe.id)" class="btn btn-primary me-5">Xem chi tiết</button>
+                <button (click)="goToReserving(shoe.id)" class="btn btn-primary">Đặt ngay</button>
+            </div>
+        </div>
+        }
+    }
+</div>
