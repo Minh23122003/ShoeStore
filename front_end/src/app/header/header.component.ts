@@ -16,7 +16,9 @@ export class HeaderComponent implements OnInit{
   constructor(private authService: AuthService, private router:Router) {};
 
   ngOnInit(): void {
-    this.token = this.authService.isLogin();
+    if(typeof window !== 'undefined'){
+      this.token = this.authService.isLogin();
+    }
   }
 
   logout(): void{

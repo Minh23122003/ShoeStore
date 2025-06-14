@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, numberAttribute } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from './auth.service';
 
 export interface Category{
   id: number,
@@ -17,6 +18,13 @@ export interface Shoe{
   remaining_quantity: number
 }
 
+export interface Comment{
+  id: number,
+  content: string,
+  created_at: string,
+  user: User,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +32,8 @@ export class ShoesService {
   private urlApiCategory = "http://localhost:8000/api/categories";
   private urlApiShoe = "http://localhost:8000/api/shoes";
   private urlApiBill = "http://localhost:8000/api/bills";
+  private urlApiComment = "http://localhost:8000/api/comments";
+
 
   constructor(private http: HttpClient) { }
 
@@ -62,5 +72,24 @@ export class ShoesService {
     })
     
     return this.http.post<any>(this.urlApiBill, formData, {headers: headers});
+  }
+
+  getComments(id: number, page: number): Observable<any>{
+    let params = new HttpParams();
+    params = params.set("page", page);
+
+    return this.http.get<any>(`${this.urlApiShoe}/${id}/comments`, {params});
+  }
+
+  deleteComment(id: number): Observable<any>{
+    return this.http.delete<any>(`${this.urlApiComment}/${id}`);
+  }
+
+  postComment(id: number, content: string): Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+    })
+
+    return this.http.post<any>(`${this.urlApiShoe}/${id}/comments`, {"content": content}, {headers: headers});
   }
 }

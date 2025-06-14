@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ShoesSeeder::class);
         $this->call(BillsSeeder::class);
         $this->call(RatingsSeeder::class);
+        $this->call(CommentsSeeder::class);
     }
 }

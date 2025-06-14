@@ -31,7 +31,7 @@
 
     <div class="container-fluid row">
         <div class="col-md-3">
-            <div class="bg-info d-flex align-items-center ps-2" style="height: 50px">List of tables</div>
+            <div class="bg-info d-flex align-items-center ps-2" style="height: 50px">Tables list</div>
             <table class="table table-striped">
                 <tbody>
                     <tr>
@@ -58,6 +58,11 @@
                         <th width="150"><a class="text-dark text-decoration-none" href="{{ route('admin.ratings.index') }}">ratings</a></th>
                         <th width="100"><a class="text-dark text-decoration-none" href="{{ route('admin.ratings.create') }}">&#43; Add</a></th>
                         <th><a class="text-dark text-decoration-none" href="{{ route('admin.ratings.index') }}">&#9998; Change</a></th>
+                    </tr>
+                    <tr>
+                        <th width="150"><a class="text-dark text-decoration-none" href="{{ route('admin.comments.index') }}">comments</a></th>
+                        <th width="100"><a class="text-dark text-decoration-none" href="{{ route('admin.comments.create') }}">&#43; Add</a></th>
+                        <th><a class="text-dark text-decoration-none" href="{{ route('admin.comments.index') }}">&#9998; Change</a></th>
                     </tr>
                 </tbody>
             </table>

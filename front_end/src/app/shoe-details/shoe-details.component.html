@@ -12,5 +12,30 @@
     </div>
     <div class="col-md-5">
         <img style="width: 100%;" src="http://localhost:8000/storage/{{shoe.image}}" alt="">
+        <div class="mt-4">
+            <h2 class="mb-3">Bình luận ({{ totalComments }} bình luận)</h2>
+            <div class="container row">
+                <div class="col-md-8">
+                    <textarea [(ngModel)]="content" class="form-control mb-5" placeholder="Vui lòng nhập bình luận..."></textarea>
+                </div>
+                <button (click)="postComment()" class="btn btn-primary col-md-3" style="height: 70%;">Gửi bình luận</button>
+            </div>
+            @if (error) {
+                <p class="text-danger">{{ error }}</p>
+            }
+            @for (comment of comments; track comment.id) {
+                <div class="card mb-3">
+                    <div class="card-body">{{ comment.content }}</div>
+                    <div class="card-body">Người đăng: {{ comment.user.name }}</div>
+                    <div class="card-body">Đăng lúc {{ comment.created_at | date:"HH:mm:ss" }} ngày {{ comment.created_at | date:"dd/MM/yyyy" }}</div>
+                    @if (user != null && user.username == comment.user.username) {
+                        <button (click)="deleteComment(comment.id)" class="btn btn-danger ms-3 mb-3" style="width: 20%;">Xóa</button>
+                    }
+                </div>
+            }
+            @if (currentPage != lastPage) {
+                <div (click)="getMoreComments()" class="text-primary mb-5" style="cursor: pointer;" >Xem các bình luận khác</div>
+            }
+        </div>
     </div>
 </div>

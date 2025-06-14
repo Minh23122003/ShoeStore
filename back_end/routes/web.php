@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 
@@ -28,6 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('shoes', ShoeController::class);
     Route::resource('bills', BillController::class);
     Route::resource('ratings', RatingController::class);
+    Route::resource('comments', CommentController::class);
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
