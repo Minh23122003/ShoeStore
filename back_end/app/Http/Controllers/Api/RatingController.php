@@ -17,7 +17,25 @@ class RatingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/ratings",
+     *     summary="Tạo đánh giá",
+     *     tags={"Ratings"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"content", "star", "shoe_id"},
+     *             @OA\Property(property="content", type="string", example="Good"),
+     *             @OA\Property(property="star", type="integer", example=5),
+     *             @OA\Property(property="shoe_id", type="integer", example=2),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Tạo đánh giá thành công"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -36,7 +54,7 @@ class RatingController extends Controller
                 $rating->save();
         }
 
-        return response()->json([], 200);
+        return response()->json([], 201);
     }
 
     /**

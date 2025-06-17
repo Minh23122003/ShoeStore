@@ -9,17 +9,44 @@ use App\Models\Bill;
 class BillController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/user/bills",
+     *     summary="Lấy danh sách đơn hàng của người dùng",
+     *     tags={"Users"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Danh sách đơn hàng của người dùng"
+     *     )
+     * )
      */
     public function index(Request $request)
     {
         $bills = Bill::where('user_id', $request->user()->id)->with('shoe')->get();
 
-        return response()->json($bills);
+        return response()->json($bills, 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/bills",
+     *     summary="Tạo hóa đơn",
+     *     tags={"Bills"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"quantity", "size", "shoe_id"},
+     *             @OA\Property(property="quantity", type="integer", example=1),
+     *             @OA\Property(property="size", type="interger", example=40),
+     *             @OA\Property(property="shoe_id", type="integer", example=2),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Tạo thành công"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -35,7 +62,22 @@ class BillController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/bills/{id}",
+     *     summary="Lấy thông tin hóa đơn",
+     *     tags={"Bills"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã đơn hàng",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Thông tin hóa đơn"
+     *     )
+     * )
      */
     public function show(string $id)
     {
@@ -53,7 +95,22 @@ class BillController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/bills/{id}",
+     *     summary="Xóa hóa đơn chưa thanh toán",
+     *     tags={"Bills"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã đơn hàng",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Xóa thành công"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {
@@ -62,6 +119,24 @@ class BillController extends Controller
         return response()->json([], 204);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/bills/{id}/pay",
+     *     summary="Thanh toán hóa đơn",
+     *     tags={"Bills"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã đơn hàng",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Thanh toán thành công"
+     *     )
+     * )
+     */
     public function pay(string $id)
     {
         $bill = Bill::find($id);

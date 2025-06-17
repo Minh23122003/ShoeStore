@@ -25,7 +25,30 @@ class CommentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/shoes/{id}/comments",
+     *     summary="Tạo bình luận cho sản phẩm",
+     *     tags={"Shoes"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã sản phẩm",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"content"},
+     *             @OA\Property(property="content", type="string", example="Good"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Tạo bình luận thành công"
+     *     )
+     * )
      */
     public function store(Request $request, string $id)
     {
@@ -39,7 +62,29 @@ class CommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/shoes/{id}/comments",
+     *     summary="Lấy danh sách bình luận của sản phẩm",
+     *     tags={"Shoes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã sản phẩm",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         required=false,
+     *         description="Trang hiện tại",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Danh sách các bình luận"
+     *     )
+     * )
      */
     public function show(Request $request, string $id)
     {
@@ -65,7 +110,22 @@ class CommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/comments/{id}",
+     *     summary="Xóa bình luận",
+     *     tags={"Comments"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã bình luận",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Xóa bình luận thành công"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {

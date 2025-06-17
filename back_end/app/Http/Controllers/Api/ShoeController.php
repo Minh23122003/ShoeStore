@@ -9,7 +9,50 @@ use App\Models\Shoe;
 class ShoeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/shoes",
+     *     summary="Lấy danh sách sản phẩm",
+     *     tags={"Shoes"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=false,
+     *         description="Tên sản phẩm",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="min_price",
+     *         in="query",
+     *         required=false,
+     *         description="Giá sản phẩm tối thiểu",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="max_price",
+     *         in="query",
+     *         required=false,
+     *         description="Giá sản phẩm tối đa",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         required=false,
+     *         description="Danh mục của sản phẩm",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         required=false,
+     *         description="Trang hiện tại",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Danh sách sản phẩm"
+     *     )
+     * )
      */
     public function index(Request $request)
     {
@@ -45,13 +88,28 @@ class ShoeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/shoes/{id}",
+     *     summary="Lấy thông tin của 1 sản phẩm",
+     *     tags={"Shoes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Mã sản phẩm",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Thông tin sản phẩm"
+     *     )
+     * )
      */
     public function show(string $id)
     {
         $shoe = Shoe::find($id);
 
-        return response()->json($shoe);
+        return response()->json($shoe, 200);
     }
 
     /**
